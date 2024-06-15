@@ -22,7 +22,8 @@
     "permissions": [
       "Акции",
       "Модерация объявлений",
-      "Тех. поддержка"
+      "Тех. поддержка",
+      "Модерация объявлений"
     ],
     "image": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?cs=srgb&dl=pexels-simon-robben-614810.jpg&fm=jpg"
   },

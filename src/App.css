@@ -1,15 +1,14 @@
 @import url('https://fonts.cdnfonts.com/css/futura-pt');
 
-.App {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-}
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Futura PT', sans-serif;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
 }
 
 .Sidebar {
@@ -18,7 +17,14 @@ body {
   transition: all 0.3s ease;
   padding-left: 15px;
   background: white;
-  width: 100%;
+  width: 250px; /* Ширина сайдбара */
+  height: 100vh;
+  transform: translateX(-100%); /* Изначально скрыт */
+}
+
+.Sidebar.active {
+  transform: translateX(0);
+  width: 100%; /* Показ при активном состоянии */
 }
 
 .Sidebar ul {
@@ -28,7 +34,7 @@ body {
   font-weight: 450;
   font-size: 16px;
   line-height: 20px;
-  width: 125px;
+  width: 100%;
 }
 
 .Sidebar li {
@@ -69,7 +75,6 @@ body {
 
 .Info {
   margin-left: 13px;
-
 }
 
 .Info .Name {
@@ -86,91 +91,127 @@ body {
   color: #9494A0;
 }
 
-.Toogle {
-  margin-top: 82px;
-  margin-left: 15px;
-  margin-bottom: 22px;
+.Toggle {
+  height: 26px;
   cursor: pointer;
+  display: flex;
+  margin-left: 15px;
+  margin-top: 82px;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.Logo {
-  width: 22.47px;
-  height: 34px;
-  display: none;
-  background-image: url('./icons/Vector.png');
+.Toggle svg {
+  margin-right: 5px;
 }
 
-.MainForm{
-  width: 85%;
-  height: 589px;
-  background: #F9FAFB;
-}
-
-.MainForm .Header{
+.Toggle h1{
+  margin-left: 13px;
   font-weight: 500;
   font-size: 26px;
-  line-height: 44px;
   color: #424F5E;
 }
 
-@media only screen and (min-width: 700px) {
-  .Toogle {
-    margin-top: 0;
-    margin-bottom: 0;
-    display: none;
-  }
+.search-wrapper {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #C1C1CB;
+  border-radius: 10px;
+  
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
-  .Logo {
-    margin-top: 25px;
-    margin-bottom: 26px;
-    display: block;
-  }
+.search-wrapper input[type="search"] {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
 
-  .Info {
-    display: none;
-  }
+.search-wrapper svg {
+  margin-left: 8px;
+  cursor: pointer;
+}
 
-  .Sidebar .Title {
-    display: none;
-  }
+.Users .Avatar img {
+  height: 55px;
+  width: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
-  body {
-    background: #EBEBF0;
-  }
+.Users{
+  margin-bottom: 20px;
+}
 
-  .Sidebar {
-    height: 100vh;
-    width: 100px;
-    background: #F9FAFB;
-    margin-left: 0;
-    border-radius: 0 15px 15px 0;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    overflow: hidden;
-  }
 
-  .Sidebar li {
-    margin-bottom: 34px;
-    width: 125px;
-    text-align: center;
-    justify-content: center;
-  }
+.MainForm .Header input[type=submit]{
+  height: 30px;
+  margin-top: 7px;
+  color: #F9FAFB;
+  font-weight: 450;
+  font-size: 16px;
+  border-radius: 10px;
+  background: #32C076;
+  border: none;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 24px;
+}
 
-  .Sidebar svg {
-    width: 25px;
-    height: 25px;
-  }
+.MainForm{
+  margin-left: 15px;
+  margin-right: 15px;
+}
 
-  .Profile .Avatar img {
-    height: 60px;
-    width: 60px;
-  }
+.MainForm .Users{
+  display: flex;
+  width: 100%;
+}
+.MainForm .UserInfo {
+  margin-left: 15px;
+}
+.MainForm .UserInfo .UserName .FullName{
+  font-size: 14px;
+  font-weight: 500;
+  color: #424F5E;
+}
 
-  .MainForm{
-    margin-left: 205px;
-    margin-top: 53px;
-  }
+.MainForm .UserInfo .UserName .Email{
+  font-weight: 400;
+  font-size: 14px;
+  color: #9494A0;
+}
+
+.MainForm .UserInfo .Labels{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.MainForm .UserInfo .Labels .Perm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 400;
+  color: #9494A0;
+  border: 1px solid #C1C1CB;
+  border-radius: 5px;
+  margin-right: 3px;
+  padding: 3px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.Edit{
+  margin-left: auto;
+  cursor: pointer;
 }
