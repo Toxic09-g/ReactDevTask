@@ -17,6 +17,7 @@ function MainForm() {
     return (
         <div className='MainForm'>
             <div className='Header'>
+                <h1>Команда</h1>
                 <div className='search-wrapper'>
                     <input
                         type='search'

@@ -17,14 +17,16 @@ body {
   transition: all 0.3s ease;
   padding-left: 15px;
   background: white;
-  width: 250px; /* Ширина сайдбара */
+  width: 250px;
   height: 100vh;
-  transform: translateX(-100%); /* Изначально скрыт */
+  transform: translateX(-100%);
+  /* Изначально скрыт */
 }
 
 .Sidebar.active {
   transform: translateX(0);
-  width: 100%; /* Показ при активном состоянии */
+  width: 100%;
+  /* Показ при активном состоянии */
 }
 
 .Sidebar ul {
@@ -105,7 +107,7 @@ body {
   margin-right: 5px;
 }
 
-.Toggle h1{
+.Toggle h1 {
   margin-left: 13px;
   font-weight: 500;
   font-size: 26px;
@@ -118,7 +120,6 @@ body {
   align-items: center;
   border: 1px solid #C1C1CB;
   border-radius: 10px;
-  
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -145,12 +146,13 @@ body {
   border-radius: 50%;
 }
 
-.Users{
+.Users {
   margin-bottom: 20px;
+
 }
 
 
-.MainForm .Header input[type=submit]{
+.MainForm .Header input[type=submit] {
   height: 30px;
   margin-top: 7px;
   color: #F9FAFB;
@@ -164,36 +166,38 @@ body {
   margin-bottom: 24px;
 }
 
-.MainForm{
+.MainForm {
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.MainForm .Users{
+.MainForm .Users {
   display: flex;
   width: 100%;
 }
+
 .MainForm .UserInfo {
   margin-left: 15px;
 }
-.MainForm .UserInfo .UserName .FullName{
+
+.MainForm .UserInfo .UserName .FullName {
   font-size: 14px;
   font-weight: 500;
   color: #424F5E;
 }
 
-.MainForm .UserInfo .UserName .Email{
+.MainForm .UserInfo .UserName .Email {
   font-weight: 400;
   font-size: 14px;
   color: #9494A0;
 }
 
-.MainForm .UserInfo .Labels{
+.MainForm .UserInfo .Labels {
   display: flex;
   flex-wrap: wrap;
 }
 
-.MainForm .UserInfo .Labels .Perm{
+.MainForm .UserInfo .Labels .Perm {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,7 +215,194 @@ body {
   margin-top: 4px;
 }
 
-.Edit{
+.Edit {
   margin-left: auto;
   cursor: pointer;
+}
+
+.Logo {
+  display: none;
+}
+
+.Sidebar ul li {
+  width: 20px;
+  height: 20px;
+}
+
+.MainForm .Header h1 {
+  display: none;
+}
+
+@media screen and (min-width: 950px) {
+  body {
+    background: #EBEBF0
+  }
+
+  .MainForm .Header {
+    display: flex;
+  }
+
+  .MainForm .Header input[type=submit] {
+    height: 36px;
+    margin-top: 0;
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+
+  .App {
+    display: flex;
+  }
+
+  .Toggle {
+    display: none;
+  }
+
+  .Sidebar {
+    border-radius: 0 15px 15px 0;
+    padding-left: 0;
+    position: relative;
+    transform: translateX(0);
+    min-width: 100px;
+    max-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Sidebar ul {
+    padding: 0;
+    list-style-type: none;
+    color: #9494A0;
+    font-weight: 450;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Sidebar ul li {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .Sidebar ul li:hover {
+    margin-left: 5px;
+    /* Убрать смещение при наведении */
+  }
+
+  .Sidebar .Title {
+    display: none;
+  }
+
+  .Logo {
+    display: block;
+
+    margin-top: 25px;
+  }
+
+  .Sidebar .Profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Центрирование по горизонтали */
+  }
+
+  .Sidebar .Profile .Info {
+    display: none;
+  }
+
+  .MainForm {
+    height: fit-content;
+    width: 75%;
+    background: #F9FAFB;
+    border-radius: 15px;
+    margin-left: 10%;
+    margin-top: 53px;
+  }
+
+  .MainForm .Header {
+    margin-bottom: 19px;
+  }
+
+  .MainForm .Header h1 {
+    display: block;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 44px;
+    color: #424F5E;
+    margin-left: 29px;
+    margin-top: 15px;
+  }
+
+  .MainForm .Header .search-wrapper {
+    margin-left: 96px;
+    margin-top: 19px;
+    width: 649px;
+  }
+
+  .MainForm .Header input[type=submit] {
+    margin-top: 19px;
+    margin-left: 10px;
+    margin-right: 29px;
+    max-width: 218px;
+  }
+
+  .Users {
+    height: 100px;
+  }
+
+  .Users:hover {
+    background: #EFEFF6;
+  }
+
+  .Users .Avatar img {
+    width: 64px;
+    height: 64px;
+    margin-top: 17px;
+    margin-left: 29px;
+  }
+
+  .Users .Edit {
+    margin-top: 15px;
+    margin-right: 29px;
+  }
+
+  .UserInfo .UserName {
+    margin-top: 22px;
+    display: flex;
+  }
+
+  .MainForm .UserInfo .UserName .FullName {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #424F5E;
+  }
+
+  .MainForm .UserInfo .UserName .Email {
+    margin-left: 9px;
+    font-size: 18px;
+    font-weight: 450;
+    line-height: 20px;
+    color: #9494A0;
+  }
+
+  .MainForm .UserInfo .Labels {
+    margin-top: 9px;
+  }
+
+  .MainForm .UserInfo .Labels .Perm {
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
 }
