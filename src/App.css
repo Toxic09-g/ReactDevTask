@@ -321,7 +321,9 @@ body {
   color: #F9FAFB;
   margin-bottom: 59px;
   text-align: center;
+  cursor: pointer;
 }
+
 
 .basic-multi-select {
   margin-bottom: 8px;
