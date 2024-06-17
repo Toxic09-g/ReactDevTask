@@ -5,7 +5,7 @@ const usersKey = "users"
 const getUsers = async () => {
     const users = JSON.parse(localStorage.getItem(usersKey))
     
-    if (!users || users.length == 0) {
+    if (!users || users.length === 0) {
         localStorage.setItem(usersKey, JSON.stringify(data))
         return data
     }
@@ -21,4 +21,12 @@ const deleteUser = async (userIndex) => {
     localStorage.setItem(usersKey, JSON.stringify(users))
 }
 
-export {getUsers, deleteUser}
+const addUser = async (userObj) => {
+    const users = JSON.parse(localStorage.getItem(usersKey))
+
+    users.push(userObj)
+
+    localStorage.setItem(usersKey, JSON.stringify(users))
+}
+
+export {getUsers, deleteUser, addUser}

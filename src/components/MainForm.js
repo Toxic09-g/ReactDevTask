@@ -5,6 +5,8 @@ import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
 import ConfirmationModal from "./ConfirmationModal";
 import AddUserModal from "./AddUserModal"; // Добавляем импорт для AddUserModal
+import DefaultUser from "../icons/user.png"
+import EditPermissionsModal from "./EditPermissionsModal";
 
 const userObj = {
     /** @type {string} */
@@ -20,12 +22,13 @@ const userObj = {
 function MainForm() {
     const [users, setUsers] = useState([userObj]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [selectedUserIndex, setSelectedUserIndex] = useState();
+    const [selectedUserIndex, setSelectedUserIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [fetchTrigger, setFetchTrigger] = useState(false);
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
     const [isAddModalOpen, setAddModalOpen] = useState(false); // Добавляем состояние для модального окна добавления пользователя
+    const [isEditPermissionsModalOpen, setEditPermissionsModal] = useState(false);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -78,6 +81,7 @@ function MainForm() {
     const [selectedUser, setSelectedUser] = useState(null);
 
     const handleEditClick = (userIndex) => {
+        setSelectedUserIndex(userIndex);
         setSelectedUser(users[userIndex]);
         setIsModalOpen(true);
     };
@@ -112,11 +116,24 @@ function MainForm() {
             {filteredUsers.map((item, index) => (
                 <div className="Users" key={item.email}>
                     <div className="Avatar">
-                        <img src={item.image} alt={`${item.name}'s avatar`} />
+                        {item.image ?
+
+                            <img src={item.image} alt={`${item.name}'s avatar`} />
+                            :
+                            <img src={DefaultUser} alt={`${item.name}'s avatar`} />
+                        }
                     </div>
                     <div className="UserInfo">
                         <div className="UserName">
-                            <div className="FullName">{item.name}</div>
+                            {item.name ?
+
+                                <div className="FullName">{item.name}</div>
+                                :
+                                <>
+                                    <div className="FullName">Пользователь</div>
+                                    <div className="Email">Не авторизован</div>
+                                </>
+                            }
                             <div className="Email">{item.email}</div>
                         </div>
                         <div className="Labels">
@@ -147,7 +164,11 @@ function MainForm() {
                 <ConfirmationModal userEmail={selectedUser && selectedUser.email} onClose={() => setConfirmationModalOpen(false)} />
             )}
             {isAddModalOpen && ( /* Рендер модального окна добавления пользователя */
-                <AddUserModal onClose={() => setAddModalOpen(false)} />
+                <AddUserModal onClose={() => setAddModalOpen(false) & setFetchTrigger(!fetchTrigger)} />
+            )}
+
+            {isEditPermissionsModalOpen && (
+                <EditPermissionsModal onClose={() => setEditPermissionsModal(false)} />
             )}
         </div>
     );
