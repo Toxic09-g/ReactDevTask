@@ -4,18 +4,15 @@ import Edit from "../icons/Group 34685.png";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
 import ConfirmationModal from "./ConfirmationModal";
-import AddUserModal from "./AddUserModal"; // Добавляем импорт для AddUserModal
-import DefaultUser from "../icons/user.png"
+import AddUserModal from "./AddUserModal";
+import DefaultUser from "../icons/user.png";
 import EditPermissionsModal from "./EditPermissionsModal";
+import SuccessModal from "./SuccessModal"; // Import the SuccessModal
 
 const userObj = {
-    /** @type {string} */
     name: "",
-    /** @type {string} */
     email: "",
-    /** @type {string[]} */
     permissions: [],
-    /** @type {string} */
     image: "",
 };
 
@@ -27,8 +24,9 @@ function MainForm() {
     const [fetchTrigger, setFetchTrigger] = useState(false);
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-    const [isAddModalOpen, setAddModalOpen] = useState(false); // Добавляем состояние для модального окна добавления пользователя
+    const [isAddModalOpen, setAddModalOpen] = useState(false);
     const [isEditPermissionsModalOpen, setEditPermissionsModal] = useState(false);
+    const [isSuccessModalOpen, setSuccessModalOpen] = useState(false); // New state for success modal
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -59,18 +57,18 @@ function MainForm() {
             setIsModalOpen(false);
             setDeleteModalOpen(true);
         } catch (error) {
-            console.error('Failed to delete user:', error);
+            console.error("Failed to delete user:", error);
         }
     };
 
     const handleChange = () => {
-        // Implement change functionality
+        setEditPermissionsModal(true);
         handleCloseModal();
     };
 
     const handleSendCode = () => {
-        // Implement send code functionality
-        setConfirmationModalOpen(true);
+        setConfirmationModalOpen(false);
+        setSuccessModalOpen(true); // Show the success modal
         handleCloseModal();
     };
 
@@ -85,6 +83,7 @@ function MainForm() {
         setSelectedUser(users[userIndex]);
         setIsModalOpen(true);
     };
+
     return (
         <div className="MainForm">
             <div className="Header">
@@ -111,29 +110,31 @@ function MainForm() {
                         />
                     </svg>
                 </div>
-                <input type="submit" value="Добавить пользователя" onClick={() => setAddModalOpen(true)} /> {/* Обработчик для открытия модального окна */}
+                <input
+                    type="submit"
+                    value="Добавить пользователя"
+                    onClick={() => setAddModalOpen(true)}
+                />
             </div>
             {filteredUsers.map((item, index) => (
                 <div className="Users" key={item.email}>
                     <div className="Avatar">
-                        {item.image ?
-
+                        {item.image ? (
                             <img src={item.image} alt={`${item.name}'s avatar`} />
-                            :
+                        ) : (
                             <img src={DefaultUser} alt={`${item.name}'s avatar`} />
-                        }
+                        )}
                     </div>
                     <div className="UserInfo">
                         <div className="UserName">
-                            {item.name ?
-
+                            {item.name ? (
                                 <div className="FullName">{item.name}</div>
-                                :
+                            ) : (
                                 <>
                                     <div className="FullName">Пользователь</div>
                                     <div className="Email">Не авторизован</div>
                                 </>
-                            }
+                            )}
                             <div className="Email">{item.email}</div>
                         </div>
                         <div className="Labels">
@@ -161,20 +162,32 @@ function MainForm() {
                 <DeleteModal onClose={() => setDeleteModalOpen(false)} />
             )}
             {isConfirmationModalOpen && (
-                <ConfirmationModal userEmail={selectedUser && selectedUser.email} onClose={() => setConfirmationModalOpen(false)} />
+                <ConfirmationModal
+                    userEmail={selectedUser && selectedUser.email}
+                    onClose={() => setConfirmationModalOpen(false)}
+                />
             )}
-            {isAddModalOpen && ( /* Рендер модального окна добавления пользователя */
-                <AddUserModal onClose={() => setAddModalOpen(false) & setFetchTrigger(!fetchTrigger)} />
+            {isAddModalOpen && (
+                <AddUserModal
+                    onClose={() => {
+                        setAddModalOpen(false);
+                        setFetchTrigger(!fetchTrigger);
+                    }}
+                    onSuccess={() => setSuccessModalOpen(true)} // Pass the success handler
+                />
             )}
-
             {isEditPermissionsModalOpen && (
-                <EditPermissionsModal onClose={() => setEditPermissionsModal(false)} />
+                <EditPermissionsModal
+                    onClose={() => setEditPermissionsModal(false)}
+                    user={selectedUser}
+                    userIndex={selectedUserIndex}
+                />
+            )}
+            {isSuccessModalOpen && (
+                <SuccessModal onClose={() => setSuccessModalOpen(false)} />
             )}
         </div>
     );
-
-
-
 }
 
 export default MainForm;

@@ -16,7 +16,7 @@ const CheckboxOption = (props) => (
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-function AddUserModal({ onClose }) {
+function AddUserModal({ onClose, onSuccess }) {
   const [selectedPermissions, setSelectedPermissions] = useState([]);
   const [email, setEmail] = useState("");
 
@@ -28,6 +28,7 @@ function AddUserModal({ onClose }) {
     { value: "clients", label: "Обращения клиентов" },
     { value: "analitic", label: "Аналитика" },
     { value: "stocks", label: "Акции" },
+    { value: "admin", label: "Администратор" },
   ];
 
   const handleChange = (selectedOptions) => {
@@ -60,7 +61,9 @@ function AddUserModal({ onClose }) {
       permissions: labels,
       image: "",
     });
+
     onClose();
+    onSuccess(); // Call the success handler after adding the user
   };
 
   return (
